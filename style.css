@@ -48,6 +48,9 @@ table {
 /* Main CSS*/
 
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     font-family: "Nunito", Verdana, Geneva, Tahoma, sans-serif;
     background-color: #353535;
     color: white;
@@ -57,6 +60,14 @@ h1 {
     font-size: 30px;
     font-weight: bold;
     padding: 20px 0px 20px 0px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color:white;
 }
 
 .title-section {
@@ -71,11 +82,12 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    filter: drop-shadow(0px 7px 0px #33533d);
 }
 
 .calc-container {
     width: 300px;
-    height: 450px;
+    /* height: 450px; */
     border-radius: 5px;
     background-color: #000000;
 }
@@ -88,6 +100,10 @@ h1 {
     color: #353535;
     padding: 10px;
     margin: 45px 25px 10px 25px;
+}
+
+.calc-history {
+    font-size: 15px;
 }
 
 .calc-keys {
@@ -126,4 +142,12 @@ h1 {
 
 .zero-button {
     grid-column: span 2;
+}
+
+footer {
+    margin-top: auto;
+    text-align: center;
+    font-size: 12px;
+    padding: 10px 0px 10px;
+    background-color: #000000;
 }

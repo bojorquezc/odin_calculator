@@ -40,7 +40,14 @@ function operate(operator, a, b) {
 
 //DISPLAY COUNTER AND NUMBER BUTTON DECLARATIONS
 let displayValue = '';
+let displayHistory = '';
+let operator = '';
+let numberOne = 0;
+let numberTwo = 0;
+let result = 0;
+
 const calcDigits = document.querySelector('.calc-digits');
+const calcHistory = document.querySelector('.calc-history');
 
 const clearButton = document.querySelector('#clear-button');
 const plusButton = document.querySelector('.plus-button');
@@ -68,82 +75,106 @@ function clearIfZero() {
     }
 }
 
+function clearHistoryIfZero() {
+    if (calcHistory.textContent == '0') {
+        calcHistory.textContent = '';
+    }
+}
+
 clearButton.addEventListener('click', () => {
     displayValue = calcDigits.textContent = '0';
+    displayHistory = calcHistory.textContent = '0';
+    operator = '';
+    numberOne = 0;
+    numberTwo = 0;
+    result = 0;
 })
 
 nineButton.addEventListener('click', () => {
     clearIfZero();
     displayValue = calcDigits.textContent += '9';
-    calculationValue = Number(displayValue);
-    return calculationValue;
 })
 
 eightButton.addEventListener('click', () => {
     clearIfZero();
     displayValue = calcDigits.textContent += '8';
-    calculationValue = Number(displayValue);
-    return calculationValue;
 })
 
 sevenButton.addEventListener('click', () => {
     clearIfZero();
     displayValue = calcDigits.textContent += '7';
-    calculationValue = Number(displayValue);
-    return calculationValue;
 })
 
 sixButton.addEventListener('click', () => {
     clearIfZero();
     displayValue = calcDigits.textContent += '6';
-    calculationValue = Number(displayValue);
-    return calculationValue;
 })
 
 fiveButton.addEventListener('click', () => {
     clearIfZero();
     displayValue = calcDigits.textContent += '5';
-    calculationValue = Number(displayValue);
-    return calculationValue;
 })
 
 fourButton.addEventListener('click', () => {
     clearIfZero();
     displayValue = calcDigits.textContent += '4';
-    calculationValue = Number(displayValue);
-    return calculationValue;
 })
 
 threeButton.addEventListener('click', () => {
     clearIfZero();
     displayValue = calcDigits.textContent += '3';
-    calculationValue = Number(displayValue);
-    return calculationValue;
 })
 
 twoButton.addEventListener('click', () => {
     clearIfZero();
     displayValue = calcDigits.textContent += '2';
-    calculationValue = Number(displayValue);
-    return calculationValue;
 })
 
 oneButton.addEventListener('click', () => {
     clearIfZero();
     displayValue = calcDigits.textContent += '1';
-    calculationValue = Number(displayValue);
-    return calculationValue;
 })
 
 zeroButton.addEventListener('click', () => {
     clearIfZero();
     displayValue = calcDigits.textContent += '0';
-    calculationValue = Number(displayValue);
-    return calculationValue;
 })
 
 
 //OPERATION BUTTON DECLARATIONS
 plusButton.addEventListener('click', () => {
-    
+    operator = '+';
+    numberOne = Number(displayValue);
+    displayHistory = calcHistory.textContent = numberOne.toString() + '+';
+    displayValue = calcDigits.textContent = '0';
+})
+
+
+minusButton.addEventListener('click', () => {
+    operator = '-';
+    numberOne = Number(displayValue);
+    displayHistory = calcHistory.textContent = numberOne.toString() + '-';
+    displayValue = calcDigits.textContent = '0';
+})
+
+multiplyButton.addEventListener('click', () => {
+    operator = '*';
+    numberOne = Number(displayValue);
+    displayHistory = calcHistory.textContent = numberOne.toString() + '*';
+    displayValue = calcDigits.textContent = '0';
+})
+
+divideButton.addEventListener('click', () => {
+    operator = '/';
+    numberOne = Number(displayValue);
+    displayHistory = calcHistory.textContent = numberOne.toString() + '/';
+    displayValue = calcDigits.textContent = '0';
+})
+
+equalsButton.addEventListener('click', () => {
+    numberTwo = Number(displayValue);
+    result = operate(operator, numberOne, numberTwo);
+    displayHistory = calcHistory.textContent += numberTwo.toString() + '=';
+    displayValue = calcDigits.textContent = result.toString();
+    return result;
 })
