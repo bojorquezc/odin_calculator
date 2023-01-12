@@ -88,6 +88,7 @@ clearButton.addEventListener('click', () => {
     numberOne = 0;
     numberTwo = 0;
     result = 0;
+    resultDisplay = '';
 })
 
 nineButton.addEventListener('click', () => {
@@ -142,11 +143,29 @@ zeroButton.addEventListener('click', () => {
 
 
 //OPERATION BUTTON DECLARATIONS
+// plusButton.addEventListener('click', () => {
+//     operator = '+';
+//     numberOne = Number(displayValue);
+//     displayHistory = calcHistory.textContent = numberOne.toString() + '+';
+//     displayValue = calcDigits.textContent = '0';
+// })
+
 plusButton.addEventListener('click', () => {
     operator = '+';
-    numberOne = Number(displayValue);
-    displayHistory = calcHistory.textContent = numberOne.toString() + '+';
-    displayValue = calcDigits.textContent = '0';
+    if (numberOne != 0) {
+        numberTwo = Number(displayValue);
+        result = operate(operator, numberOne, numberTwo);
+        displayHistory = calcHistory.textContent += numberTwo.toString() + '+';
+        displayValue = calcDigits.textContent = result.toString();
+        numberOne = result;
+        numberTwo = 0;
+    } else {
+        numberOne = Number(displayValue);
+        displayHistory = calcHistory.textContent = numberOne.toString() + '+';
+        // displayValue = calcDigits.textContent = '0';
+    }
+    // displayValue = calcDigits.textContent = '0';
+
 })
 
 
