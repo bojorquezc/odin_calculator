@@ -155,17 +155,15 @@ plusButton.addEventListener('click', () => {
     if (numberOne != 0) {
         numberTwo = Number(displayValue);
         result = operate(operator, numberOne, numberTwo);
-        displayHistory = calcHistory.textContent += numberTwo.toString() + '+';
-        displayValue = calcDigits.textContent = result.toString();
+        displayHistory = calcHistory.textContent = result.toString() + "+";
+        displayValue = calcDigits.textContent = '0';
         numberOne = result;
         numberTwo = 0;
     } else {
         numberOne = Number(displayValue);
         displayHistory = calcHistory.textContent = numberOne.toString() + '+';
-        // displayValue = calcDigits.textContent = '0';
+        displayValue = calcDigits.textContent = '0';
     }
-    // displayValue = calcDigits.textContent = '0';
-
 })
 
 
@@ -193,7 +191,10 @@ divideButton.addEventListener('click', () => {
 equalsButton.addEventListener('click', () => {
     numberTwo = Number(displayValue);
     result = operate(operator, numberOne, numberTwo);
-    displayHistory = calcHistory.textContent += numberTwo.toString() + '=';
-    displayValue = calcDigits.textContent = result.toString();
+    displayHistory = calcHistory.textContent = numberOne + operator + numberTwo + "=";
+    calcDigits.textContent = result.toString();
+    // displayValue = calcDigits.textContent = result.toString();
+    numberOne = result;
+    numberTwo = 0;
     return result;
 })
