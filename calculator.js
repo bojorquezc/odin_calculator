@@ -13,7 +13,6 @@ function multiplyNumbers(a, b) {
 
 function divideNumbers(a, b) {
     if (b == 0) {
-        console.log("Can't divide by 0!");
     } else {
         return a / b;
     }
@@ -45,6 +44,7 @@ let operator = '';
 let numberOne = 0;
 let numberTwo = 0;
 let result = 0;
+let caseNumber = '';
 
 const calcDigits = document.querySelector('.calc-digits');
 const calcHistory = document.querySelector('.calc-history');
@@ -81,7 +81,7 @@ function clearHistoryIfZero() {
     }
 }
 
-clearButton.addEventListener('click', () => {
+function resetCalculator() {
     displayValue = calcDigits.textContent = '0';
     displayHistory = calcHistory.textContent = '0';
     operator = '';
@@ -89,6 +89,10 @@ clearButton.addEventListener('click', () => {
     numberTwo = 0;
     result = 0;
     resultDisplay = '';
+}
+
+clearButton.addEventListener('click', () => {
+    resetCalculator();
 })
 
 nineButton.addEventListener('click', () => {
@@ -142,59 +146,172 @@ zeroButton.addEventListener('click', () => {
 })
 
 
-//OPERATION BUTTON DECLARATIONS
-// plusButton.addEventListener('click', () => {
-//     operator = '+';
-//     numberOne = Number(displayValue);
-//     displayHistory = calcHistory.textContent = numberOne.toString() + '+';
-//     displayValue = calcDigits.textContent = '0';
-// })
+//HELPER FUNCTION FOR BUTTON DECLARATIONS
+function operationHelper() {
+    numberTwo = Number(displayValue);
+    result = operate(operator, numberOne, numberTwo);
+    displayHistory = calcHistory.textContent = result.toString() + operator;
+    displayValue = calcDigits.textContent = '0';
+    numberOne = result;
+    numberTwo = 0;
+}
 
+function calculationConsole() {
+    console.log(`case number: ${caseNumber}`);
+    console.log('-operator:' + operator);
+    console.log('-numberOne:' + numberOne);
+    console.log('-numberTwo:' + numberTwo);
+    console.log('-result:' + result);
+}
+
+
+//OPERATION BUTTON DECLARATIONS
 plusButton.addEventListener('click', () => {
-    operator = '+';
-    if (numberOne != 0) {
-        numberTwo = Number(displayValue);
-        result = operate(operator, numberOne, numberTwo);
-        displayHistory = calcHistory.textContent = result.toString() + "+";
-        displayValue = calcDigits.textContent = '0';
+    if (numberOne != 0 && operator != '+') {
+        caseNumber = 'Plus Operation(1)'
+        operationHelper();
+        calculationConsole();
+        operator = '+';
+        displayHistory = calcHistory.textContent = result.toString() + operator;
+
+    } else if (numberOne != 0) {
+        caseNumber = 'Plus Operation(2)'
+        operator = '+';
+        operationHelper();
+        calculationConsole();
+
+    } else if (result != 0) {
+        caseNumber = 'Plus Operation(3)'
+        operator = '+';
         numberOne = result;
-        numberTwo = 0;
-    } else {
-        numberOne = Number(displayValue);
-        displayHistory = calcHistory.textContent = numberOne.toString() + '+';
+        displayHistory = calcHistory.textContent = numberOne.toString() + operator;
         displayValue = calcDigits.textContent = '0';
+        calculationConsole();
+
+    } else {
+        caseNumber = 'Plus Operation(4)'
+        operator = '+';
+        numberOne = Number(displayValue);
+        displayHistory = calcHistory.textContent = numberOne.toString() + operator;
+        displayValue = calcDigits.textContent = '0';
+        calculationConsole();
     }
 })
 
 
 minusButton.addEventListener('click', () => {
-    operator = '-';
-    numberOne = Number(displayValue);
-    displayHistory = calcHistory.textContent = numberOne.toString() + '-';
-    displayValue = calcDigits.textContent = '0';
+    if (numberOne != 0 && operator != '-') {
+        caseNumber = 'Minus Operation(1)'
+        operationHelper();
+        calculationConsole();
+        operator = '-';
+        displayHistory = calcHistory.textContent = result.toString() + operator;
+
+    } else if (numberOne != 0) {
+        caseNumber = 'Minus Operation(2)'
+        operator = '-';
+        operationHelper();
+        calculationConsole();
+
+    } else if (result != 0) {
+        caseNumber = 'Minus Operation(3)'
+        operator = '-';
+        numberOne = result;
+        displayHistory = calcHistory.textContent = numberOne.toString() + operator;
+        displayValue = calcDigits.textContent = '0';
+        calculationConsole();
+
+    } else {
+        caseNumber = 'Minus Operation(4)'
+        operator = '-';
+        numberOne = Number(displayValue);
+        displayHistory = calcHistory.textContent = numberOne.toString() + operator;
+        displayValue = calcDigits.textContent = '0';
+        calculationConsole();
+    }
 })
+
 
 multiplyButton.addEventListener('click', () => {
-    operator = '*';
-    numberOne = Number(displayValue);
-    displayHistory = calcHistory.textContent = numberOne.toString() + '*';
-    displayValue = calcDigits.textContent = '0';
+    if (numberOne != 0 && operator != '*') {
+        caseNumber = 'Multiply Operation(1)'
+        operationHelper();
+        calculationConsole();
+        operator = '*';
+        displayHistory = calcHistory.textContent = result.toString() + operator;
+
+    } else if (numberOne != 0) {
+        caseNumber = 'Multiply Operation(2)'
+        operator = '*';
+        operationHelper();
+        calculationConsole();
+
+    } else if (result != 0) {
+        caseNumber = 'Multiply Operation(3)'
+        operator = '*';
+        numberOne = result;
+        displayHistory = calcHistory.textContent = numberOne.toString() + operator;
+        displayValue = calcDigits.textContent = '0';
+        calculationConsole();
+
+    } else {
+        caseNumber = 'Multiply Operation(4)'
+        operator = '*';
+        numberOne = Number(displayValue);
+        displayHistory = calcHistory.textContent = numberOne.toString() + operator;
+        displayValue = calcDigits.textContent = '0';
+        calculationConsole();
+    }
 })
 
+
 divideButton.addEventListener('click', () => {
-    operator = '/';
-    numberOne = Number(displayValue);
-    displayHistory = calcHistory.textContent = numberOne.toString() + '/';
-    displayValue = calcDigits.textContent = '0';
+    if (numberOne != 0 && operator != '/') {
+        caseNumber = 'Divide Operation(1)'
+        operationHelper();
+        calculationConsole();
+        operator = '/';
+        displayHistory = calcHistory.textContent = result.toString() + operator;
+
+    } else if (numberOne != 0) {
+        caseNumber = 'Divide Operation(2)'
+        operator = '/';
+        operationHelper();
+        calculationConsole();
+
+    } else if (result != 0) {
+        caseNumber = 'Divide Operation(3)'
+        operator = '/';
+        numberOne = result;
+        displayHistory = calcHistory.textContent = numberOne.toString() + operator;
+        displayValue = calcDigits.textContent = '0';
+        calculationConsole();
+
+    } else {
+        caseNumber = 'Divide Operation(4)'
+        operator = '/';
+        numberOne = Number(displayValue);
+        displayHistory = calcHistory.textContent = numberOne.toString() + operator;
+        displayValue = calcDigits.textContent = '0';
+        calculationConsole();
+    }
 })
+
 
 equalsButton.addEventListener('click', () => {
     numberTwo = Number(displayValue);
-    result = operate(operator, numberOne, numberTwo);
-    displayHistory = calcHistory.textContent = numberOne + operator + numberTwo + "=";
-    calcDigits.textContent = result.toString();
-    // displayValue = calcDigits.textContent = result.toString();
-    numberOne = result;
-    numberTwo = 0;
-    return result;
+
+    if(numberTwo == 0 && operator == '/') {
+        alert("Can't divide by 0!");
+        resetCalculator();
+
+    } else {
+        result = operate(operator, numberOne, numberTwo);
+        displayHistory = calcHistory.textContent = numberOne + operator + numberTwo + "=";
+        calcDigits.textContent = result.toString();
+        numberOne = 0;
+        numberTwo = 0;
+        caseNumber = 'Equal Button';
+        calculationConsole();
+    }
 })
