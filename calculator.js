@@ -70,6 +70,8 @@ const oneButton = document.querySelector('.one-button');
 const zeroButton = document.querySelector('.zero-button');
 const periodButton = document.querySelector('.period-button');
 
+let buttonNumberArray = [nineButton, eightButton, sevenButton, sixButton, fiveButton, fourButton, threeButton, twoButton, oneButton, zeroButton, periodButton];
+
 function equalsButtonFunctionality() {
     numberTwo = Number(displayValue);
 
@@ -84,13 +86,14 @@ function equalsButtonFunctionality() {
         calcDigits.textContent = result.toString();
         numberOne = 0;
         numberTwo = 0;
+        disableNumbers();
         calculationConsole();
     }
 }
 
 //OPERATION BUTTONS KEYDOWN EVENTS
 window.addEventListener('keydown', (e) => {
-    console.log(e);
+    // console.log(e);
     switch (e.code) {
         case 'Numpad9':
             clearIfZero();
@@ -259,6 +262,7 @@ function clearHistoryIfZero() {
 }
 
 function resetCalculator() {
+    enableNumbers();
     displayValue = calcDigits.textContent = '0';
     displayHistory = calcHistory.textContent = '0';
     operator = '';
@@ -283,6 +287,20 @@ function operationHelper() {
     numberTwo = 0;
 }
 
+function disableNumbers() {
+    if (calcDigits.textContent != '0') {
+        for (button of buttonNumberArray)
+        button.disabled = true;
+    }
+}
+
+function enableNumbers() {
+    if (calcDigits.textContent = '0') {
+        for (button of buttonNumberArray)
+        button.disabled = false;
+    }
+}
+
 function calculationConsole() {
     console.log(`case number: ${caseNumber}`);
     console.log('-operator:' + operator);
@@ -297,6 +315,7 @@ function calculationConsole() {
 
 //MAIN BUTTON FUNCTIONS FOR CALCULATIONS
 function plusButtonFunctionality() {
+    enableNumbers();
     if (numberOne != 0 && operator != '+') {
         caseNumber = 'Plus Operation(1)'
         operationHelper();
@@ -330,6 +349,7 @@ function plusButtonFunctionality() {
 }
 
 function minusButtonFunctionality() {
+    enableNumbers();
     if (numberOne != 0 && operator != '-') {
         caseNumber = 'Minus Operation(1)'
         operationHelper();
@@ -362,6 +382,7 @@ function minusButtonFunctionality() {
 }
 
 function multiplyButtonFunctionality() {
+    enableNumbers();
     if (numberOne != 0 && operator != '*') {
         caseNumber = 'Multiply Operation(1)'
         operationHelper();
@@ -394,6 +415,7 @@ function multiplyButtonFunctionality() {
 }
 
 function divideButtonFunctionality() {
+    enableNumbers();
     if (numberOne != 0 && operator != '/') {
         caseNumber = 'Divide Operation(1)'
         operationHelper();
