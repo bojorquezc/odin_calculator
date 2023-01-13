@@ -70,7 +70,7 @@ const oneButton = document.querySelector('.one-button');
 const zeroButton = document.querySelector('.zero-button');
 const periodButton = document.querySelector('.period-button');
 
-let buttonNumberArray = [nineButton, eightButton, sevenButton, sixButton, fiveButton, fourButton, threeButton, twoButton, oneButton, zeroButton, periodButton];
+let buttonNumberArray = [nineButton, eightButton, sevenButton, sixButton, fiveButton, fourButton, threeButton, twoButton, oneButton, zeroButton, periodButton, equalsButton];
 
 function equalsButtonFunctionality() {
     numberTwo = Number(displayValue);
