@@ -70,7 +70,23 @@ const oneButton = document.querySelector('.one-button');
 const zeroButton = document.querySelector('.zero-button');
 const periodButton = document.querySelector('.period-button');
 
+function equalsButtonFunctionality() {
+    numberTwo = Number(displayValue);
 
+    if(numberTwo == 0 && operator == '/') {
+        alert("Can't divide by 0!");
+        resetCalculator();
+
+    } else {
+        caseNumber = 'Equal Button';
+        result = operate(operator, numberOne, numberTwo);
+        displayHistory = calcHistory.textContent = numberOne + operator + numberTwo + "=";
+        calcDigits.textContent = result.toString();
+        numberOne = 0;
+        numberTwo = 0;
+        calculationConsole();
+    }
+}
 
 //OPERATION BUTTONS KEYDOWN EVENTS
 window.addEventListener('keydown', (e) => {
@@ -405,24 +421,6 @@ function divideButtonFunctionality() {
         numberOne = Number(displayValue);
         displayHistory = calcHistory.textContent = numberOne.toString() + operator;
         displayValue = calcDigits.textContent = '0';
-        calculationConsole();
-    }
-}
-
-function equalsButtonFunctionality() {
-    numberTwo = Number(displayValue);
-
-    if(numberTwo == 0 && operator == '/') {
-        alert("Can't divide by 0!");
-        resetCalculator();
-
-    } else {
-        caseNumber = 'Equal Button';
-        result = operate(operator, numberOne, numberTwo);
-        displayHistory = calcHistory.textContent = numberOne + operator + numberTwo + "=";
-        calcDigits.textContent = result.toString();
-        numberOne = 0;
-        numberTwo = 0;
         calculationConsole();
     }
 }
