@@ -69,27 +69,6 @@ const zeroButton = document.querySelector('.zero-button');
 const periodButton = document.querySelector('.period-button');
 
 
-function clearIfZero() {
-    if (calcDigits.textContent == '0') {
-        calcDigits.textContent = '';
-    }
-}
-
-function clearHistoryIfZero() {
-    if (calcHistory.textContent == '0') {
-        calcHistory.textContent = '';
-    }
-}
-
-function resetCalculator() {
-    displayValue = calcDigits.textContent = '0';
-    displayHistory = calcHistory.textContent = '0';
-    operator = '';
-    numberOne = 0;
-    numberTwo = 0;
-    result = 0;
-    resultDisplay = '';
-}
 
 clearButton.addEventListener('click', () => {
     resetCalculator();
@@ -145,8 +124,41 @@ zeroButton.addEventListener('click', () => {
     displayValue = calcDigits.textContent += '0';
 })
 
+periodButton.addEventListener('click', () => {
+    clearIfZero
+    displayValue = calcDigits.textContent += '.';
+})
 
-//HELPER FUNCTION FOR BUTTON DECLARATIONS
+
+//HELPER FUNCTIONS FOR BUTTON DECLARATIONS
+function clearIfZero() {
+    if (calcDigits.textContent == '0') {
+        calcDigits.textContent = '';
+    }
+}
+
+function clearHistoryIfZero() {
+    if (calcHistory.textContent == '0') {
+        calcHistory.textContent = '';
+    }
+}
+
+function resetCalculator() {
+    displayValue = calcDigits.textContent = '0';
+    displayHistory = calcHistory.textContent = '0';
+    operator = '';
+    numberOne = 0;
+    numberTwo = 0;
+    result = 0;
+    resultDisplay = '';
+}
+
+function disablePeriod() {
+    if (displayValue.includes("."))  {
+        periodButton.disabled = true;
+    }
+}
+
 function operationHelper() {
     numberTwo = Number(displayValue);
     result = operate(operator, numberOne, numberTwo);
@@ -156,17 +168,7 @@ function operationHelper() {
     numberTwo = 0;
 }
 
-function calculationConsole() {
-    console.log(`case number: ${caseNumber}`);
-    console.log('-operator:' + operator);
-    console.log('-numberOne:' + numberOne);
-    console.log('-numberTwo:' + numberTwo);
-    console.log('-result:' + result);
-}
-
-
-//OPERATION BUTTON DECLARATIONS
-plusButton.addEventListener('click', () => {
+function plusButtonFunctionality() {
     if (numberOne != 0 && operator != '+') {
         caseNumber = 'Plus Operation(1)'
         operationHelper();
@@ -196,10 +198,10 @@ plusButton.addEventListener('click', () => {
         displayValue = calcDigits.textContent = '0';
         calculationConsole();
     }
-})
 
+}
 
-minusButton.addEventListener('click', () => {
+function minusButtonFunctionality() {
     if (numberOne != 0 && operator != '-') {
         caseNumber = 'Minus Operation(1)'
         operationHelper();
@@ -229,10 +231,9 @@ minusButton.addEventListener('click', () => {
         displayValue = calcDigits.textContent = '0';
         calculationConsole();
     }
-})
+}
 
-
-multiplyButton.addEventListener('click', () => {
+function multiplyButtonFunctionality() {
     if (numberOne != 0 && operator != '*') {
         caseNumber = 'Multiply Operation(1)'
         operationHelper();
@@ -262,10 +263,9 @@ multiplyButton.addEventListener('click', () => {
         displayValue = calcDigits.textContent = '0';
         calculationConsole();
     }
-})
+}
 
-
-divideButton.addEventListener('click', () => {
+function divideButtonFunctionality() {
     if (numberOne != 0 && operator != '/') {
         caseNumber = 'Divide Operation(1)'
         operationHelper();
@@ -295,10 +295,9 @@ divideButton.addEventListener('click', () => {
         displayValue = calcDigits.textContent = '0';
         calculationConsole();
     }
-})
+}
 
-
-equalsButton.addEventListener('click', () => {
+function equalsButtonFunctionality() {
     numberTwo = Number(displayValue);
 
     if(numberTwo == 0 && operator == '/') {
@@ -313,5 +312,109 @@ equalsButton.addEventListener('click', () => {
         numberTwo = 0;
         caseNumber = 'Equal Button';
         calculationConsole();
+    }
+}
+
+function calculationConsole() {
+    console.log(`case number: ${caseNumber}`);
+    console.log('-operator:' + operator);
+    console.log('-numberOne:' + numberOne);
+    console.log('-numberTwo:' + numberTwo);
+    console.log('-result:' + result);
+}
+
+
+//OPERATION BUTTON CLICK EVENTS
+plusButton.addEventListener('click', () => {
+    plusButtonFunctionality();
+})
+
+
+minusButton.addEventListener('click', () => {
+    minusButtonFunctionality();
+})
+
+
+multiplyButton.addEventListener('click', () => {
+    multiplyButtonFunctionality();
+})
+
+
+divideButton.addEventListener('click', () => {
+    divideButtonFunctionality();
+})
+
+
+equalsButton.addEventListener('click', () => {
+    equalsButtonFunctionality();
+})
+
+
+//OPERATION BUTTONS KEYDOWN EVENTS
+window.addEventListener('keydown', (e) => {
+    console.log(e);
+    switch (e.code) {
+        case 'Numpad9':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '9';
+            break;
+        case 'Numpad8':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '8';
+            break;
+        case 'Numpad7':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '7';
+            break;
+        case 'Numpad6':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '6';
+            break;
+        case 'Numpad5':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '5';
+            break;
+        case 'Numpad4':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '4';
+            break;
+        case 'Numpad3':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '3';
+            break;
+        case 'Numpad2':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '2';
+            break;
+        case 'Numpad1':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '1';
+            break;
+        case 'Numpad0':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '0';
+            break;
+        case 'NumpadDecimal':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '.';
+            break;
+        case 'NumpadAdd':
+            plusButtonFunctionality();
+            break;
+        case 'NumpadSubtract':
+            minusButtonFunctionality();
+            break;
+        case 'NumpadMultiply':
+            multiplyButtonFunctionality();
+            break;
+        case 'NumpadDivide':
+            divideButtonFunctionality();
+            break;
+        case 'NumpadEnter':
+            equalsButtonFunctionality();
+            break;
+        case 'Backspace':
+            resetCalculator();
+            break;
     }
 })
