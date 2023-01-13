@@ -19,7 +19,8 @@ function divideNumbers(a, b) {
 }
 
 
-//OPERATE FUNCTION
+
+//OPERATE FUNCTION COMBINING ALL CALCULATION FUNCTIONS
 function operate(operator, a, b) {
 
     switch (operator) {
@@ -37,7 +38,8 @@ function operate(operator, a, b) {
 }
 
 
-//DISPLAY COUNTER AND NUMBER BUTTON DECLARATIONS
+
+//VARIABLES, NUMBER BUTTON AND OPERATOR BUTTON DECLARATIONS TO CONNECT HTML
 let displayValue = '';
 let displayHistory = '';
 let operator = '';
@@ -70,6 +72,78 @@ const periodButton = document.querySelector('.period-button');
 
 
 
+//OPERATION BUTTONS KEYDOWN EVENTS
+window.addEventListener('keydown', (e) => {
+    console.log(e);
+    switch (e.code) {
+        case 'Numpad9':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '9';
+            break;
+        case 'Numpad8':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '8';
+            break;
+        case 'Numpad7':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '7';
+            break;
+        case 'Numpad6':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '6';
+            break;
+        case 'Numpad5':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '5';
+            break;
+        case 'Numpad4':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '4';
+            break;
+        case 'Numpad3':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '3';
+            break;
+        case 'Numpad2':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '2';
+            break;
+        case 'Numpad1':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '1';
+            break;
+        case 'Numpad0':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '0';
+            break;
+        case 'NumpadDecimal':
+            clearIfZero();
+            displayValue = calcDigits.textContent += '.';
+            break;
+        case 'NumpadAdd':
+            plusButtonFunctionality();
+            break;
+        case 'NumpadSubtract':
+            minusButtonFunctionality();
+            break;
+        case 'NumpadMultiply':
+            multiplyButtonFunctionality();
+            break;
+        case 'NumpadDivide':
+            divideButtonFunctionality();
+            break;
+        case 'NumpadEnter':
+            equalsButtonFunctionality();
+            break;
+        case 'Backspace':
+            resetCalculator();
+            break;
+    }
+})
+
+
+
+//OPERATION BUTTONS CLICK EVENTS
 clearButton.addEventListener('click', () => {
     resetCalculator();
 })
@@ -129,8 +203,33 @@ periodButton.addEventListener('click', () => {
     displayValue = calcDigits.textContent += '.';
 })
 
+plusButton.addEventListener('click', () => {
+    plusButtonFunctionality();
+})
 
-//HELPER FUNCTIONS FOR BUTTON DECLARATIONS
+
+minusButton.addEventListener('click', () => {
+    minusButtonFunctionality();
+})
+
+
+multiplyButton.addEventListener('click', () => {
+    multiplyButtonFunctionality();
+})
+
+
+divideButton.addEventListener('click', () => {
+    divideButtonFunctionality();
+})
+
+
+equalsButton.addEventListener('click', () => {
+    equalsButtonFunctionality();
+})
+
+
+
+//HELPER FUNCTIONS
 function clearIfZero() {
     if (calcDigits.textContent == '0') {
         calcDigits.textContent = '';
@@ -168,6 +267,19 @@ function operationHelper() {
     numberTwo = 0;
 }
 
+function calculationConsole() {
+    console.log(`case number: ${caseNumber}`);
+    console.log('-operator:' + operator);
+    console.log('-numberOne:' + numberOne);
+    console.log('-numberTwo:' + numberTwo);
+    console.log(`-displayHistory:` + displayHistory);
+    console.log(`-displayValue:` + displayValue);
+    console.log('-result:' + result);
+}
+
+
+
+//MAIN BUTTON FUNCTIONS FOR CALCULATIONS
 function plusButtonFunctionality() {
     if (numberOne != 0 && operator != '+') {
         caseNumber = 'Plus Operation(1)'
@@ -305,116 +417,12 @@ function equalsButtonFunctionality() {
         resetCalculator();
 
     } else {
+        caseNumber = 'Equal Button';
         result = operate(operator, numberOne, numberTwo);
         displayHistory = calcHistory.textContent = numberOne + operator + numberTwo + "=";
         calcDigits.textContent = result.toString();
         numberOne = 0;
         numberTwo = 0;
-        caseNumber = 'Equal Button';
         calculationConsole();
     }
 }
-
-function calculationConsole() {
-    console.log(`case number: ${caseNumber}`);
-    console.log('-operator:' + operator);
-    console.log('-numberOne:' + numberOne);
-    console.log('-numberTwo:' + numberTwo);
-    console.log('-result:' + result);
-}
-
-
-//OPERATION BUTTON CLICK EVENTS
-plusButton.addEventListener('click', () => {
-    plusButtonFunctionality();
-})
-
-
-minusButton.addEventListener('click', () => {
-    minusButtonFunctionality();
-})
-
-
-multiplyButton.addEventListener('click', () => {
-    multiplyButtonFunctionality();
-})
-
-
-divideButton.addEventListener('click', () => {
-    divideButtonFunctionality();
-})
-
-
-equalsButton.addEventListener('click', () => {
-    equalsButtonFunctionality();
-})
-
-
-//OPERATION BUTTONS KEYDOWN EVENTS
-window.addEventListener('keydown', (e) => {
-    console.log(e);
-    switch (e.code) {
-        case 'Numpad9':
-            clearIfZero();
-            displayValue = calcDigits.textContent += '9';
-            break;
-        case 'Numpad8':
-            clearIfZero();
-            displayValue = calcDigits.textContent += '8';
-            break;
-        case 'Numpad7':
-            clearIfZero();
-            displayValue = calcDigits.textContent += '7';
-            break;
-        case 'Numpad6':
-            clearIfZero();
-            displayValue = calcDigits.textContent += '6';
-            break;
-        case 'Numpad5':
-            clearIfZero();
-            displayValue = calcDigits.textContent += '5';
-            break;
-        case 'Numpad4':
-            clearIfZero();
-            displayValue = calcDigits.textContent += '4';
-            break;
-        case 'Numpad3':
-            clearIfZero();
-            displayValue = calcDigits.textContent += '3';
-            break;
-        case 'Numpad2':
-            clearIfZero();
-            displayValue = calcDigits.textContent += '2';
-            break;
-        case 'Numpad1':
-            clearIfZero();
-            displayValue = calcDigits.textContent += '1';
-            break;
-        case 'Numpad0':
-            clearIfZero();
-            displayValue = calcDigits.textContent += '0';
-            break;
-        case 'NumpadDecimal':
-            clearIfZero();
-            displayValue = calcDigits.textContent += '.';
-            break;
-        case 'NumpadAdd':
-            plusButtonFunctionality();
-            break;
-        case 'NumpadSubtract':
-            minusButtonFunctionality();
-            break;
-        case 'NumpadMultiply':
-            multiplyButtonFunctionality();
-            break;
-        case 'NumpadDivide':
-            divideButtonFunctionality();
-            break;
-        case 'NumpadEnter':
-            equalsButtonFunctionality();
-            break;
-        case 'Backspace':
-            resetCalculator();
-            break;
-    }
-})
